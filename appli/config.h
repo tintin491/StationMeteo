@@ -10,8 +10,8 @@
 #include "stm32f1xx_hal.h"
 
 //Choix de la cible utilisée.
-#define NUCLEO	0
-#define BLUEPILL 1
+#define NUCLEO	1
+#define BLUEPILL 0
 
 #define MY_BLUEPILL_IS_COUNTERFEIT	BLUEPILL
 
@@ -137,7 +137,7 @@
 #define USE_MCP23017			0 //Port expander I/O en I2C
 #define USE_APDS9960			0	//Capteur de gestes, de couleur, de luminosité ambiante
 #define USE_BH1750FVI			0	//Capteur de luminosité ambiante
-#define USE_BMP180				0	//Capteur de pression
+#define USE_BMP180				1	//Capteur de pression
 #define USE_MOTOR_DC			0
 #define USE_STEPPER_MOTOR		0
 	#define STEPPER_DRIVER_TB6600_IS_DRIVEN_BY_OPENDRAIN_OUTPUTS	0	//l'un des deux modes au choix !
