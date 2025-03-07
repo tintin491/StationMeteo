@@ -40,36 +40,38 @@ int main(void)
 
 	while(1)	//boucle de tâche de fond
 	{
-		/* Start temperature conversion */
+		/*
+		//Start temperature conversion
 		BMP180_StartTemperature(&BMP180_Data);
 
-		/* Wait delay in microseconds */
-		/* You can do other things here instead of delay */
+		// Wait delay in microseconds
+		// You can do other things here instead of delay //
 		HAL_Delay(BMP180_Data.Delay/1000+1);
 
-		/* Read temperature first */
+		// Read temperature first
 		BMP180_ReadTemperature(&BMP180_Data);
 
-		/* Start pressure conversion at ultra high resolution */
+	 	// Start pressure conversion at ultra high resolution
 		BMP180_StartPressure(&BMP180_Data, BMP180_Oversampling_UltraHighResolution);
 
-		/* Wait delay in microseconds */
-		/* You can do other things here instead of delay */
+		//Wait delay in microseconds
+		//You can do other things here instead of delay
 		HAL_Delay(BMP180_Data.Delay/1000+1);
 
-		/* Read pressure value */
+		//Read pressure value
 		BMP180_ReadPressure(&BMP180_Data);
 
-		/* Format data and print to USART */
+		//Format data and print to USART
 		sprintf(buffer, "Temp: %2.3f degrees\nPressure: %6ld Pascals\nAltitude at current pressure: %3.2f meters\n\n",
 			BMP180_Data.Temperature,
 			BMP180_Data.Pressure,
 			BMP180_Data.Altitude
 		);
-		/* Send to USART */
+		//Send to USART
 		printf(buffer);
 
-		/* Some delay */
+		//Some delay
 		HAL_Delay(1000);
+		*/
 	}
 }
