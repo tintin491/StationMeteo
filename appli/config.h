@@ -124,7 +124,7 @@
 #define USE_SENSOR_LPS22HB		0//Pression (et température)
 #define USE_MLX90614			0	//Capteur de température sans contact
 #define USE_MPU6050				0//Accéléromètre et Gyroscope
-#define USE_DHT11				0
+#define USE_DHT11				1
 #define USE_LD19				0
 
 #define USE_MATRIX_KEYBOARD		0
