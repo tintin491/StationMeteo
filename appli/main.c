@@ -13,6 +13,13 @@
 #include "macro_types.h"
 #include "systick.h"
 #include "tft_ili9341/stm32f1_ili9341.h"
+#include <stdio.h>
+#include <time.h>
+#include <locale.h>
+#define SIZE 50
+char buffer_Date[SIZE];
+
+volatile uint32_t timer = 0;
 
 void writeLED(bool_e b)
 {
@@ -29,8 +36,11 @@ void process_ms(void)
 {
 	if(t)
 		t--;
+
+	if(timer) timer--;
 }
 
+time_t currentTime;
 
 int main(void)
 {
@@ -66,12 +76,19 @@ int main(void)
 	ILI9341_Puts(200,200, "chaine", &Font_11x18, ILI9341_COLOR_BROWN,
 	ILI9341_COLOR_WHITE);
 
-	while(1)	//boucle de tâche de fond
-	{
-		if(!t)
-		{
-			t = 200;
-			HAL_GPIO_TogglePin(LED_GREEN_GPIO, LED_GREEN_PIN);
-		}
-	}
+
+    time(&currentTime);
+    struct tm *localTime = localtime(&currentTime);
+    strftime(buffer_Date, sizeof(buffer_Date), "%d/%m/%y", localTime);
+    // Initialize TFT screan
+
+    ILI9341_DrawFilledCircle(107,140,100,ILI9341_COLOR_YELLOW);
+
+    for(uint16_t i = 0; i <= SIZE; i++) {
+        ILI9341_Puts(116,(18 + i),&buffer_Date[i], &Font_11x18, ILI9341_COLOR_BLACK,ILI9341_COLOR_WHITE);
+    }
+	 while(1)
+	 {
+
+	  }
 }
