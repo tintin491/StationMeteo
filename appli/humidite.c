@@ -13,8 +13,11 @@ void Humidite_Init(void){
 }
 
 float Humidite_get(void) {
-    static uint8_t humidity_int, humidity_dec, temperature_int, temperature_dec;
-    running_e status = DHT11_state_machine_get_datas(&humidity_int, &humidity_dec,
+	static uint8_t humidity_int;
+	static uint8_t humidity_dec;
+	static uint8_t temperature_int;
+	static uint8_t temperature_dec;
+    /*running_e status = DHT11_state_machine_get_datas(&humidity_int, &humidity_dec,
                           &temperature_int, &temperature_dec);
 
     switch(status) {
@@ -30,11 +33,15 @@ float Humidite_get(void) {
         case IN_PROGRESS:
             debug_printf("Reading in progress...\n");
             break;
-    }
-    return -1.0f;
+    }*/
+    HAL_Delay(1000);
+    while (DHT11_state_machine_get_datas(&humidity_int, &humidity_dec,&temperature_int, &temperature_dec) == IN_PROGRESS){}
+    float valeur = humidity_int + (humidity_dec / 10.0f);
+    return valeur;
 }
 
 void Humidite_to_string(float humidite, char* buffer) {
     sprintf(buffer, "Humidite: %.1f%%", humidite);
 }
+
 

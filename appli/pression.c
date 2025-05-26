@@ -54,5 +54,5 @@ float Pression_get(void) {
  * @param  buffer Le buffer où stocker la chaîne
  */
 void Pression_to_string(float pressure, char* buffer) {
-    sprintf(buffer, "Pres: %.1f hPa", pressure);
+    sprintf(buffer, "Pression: %.1f hPa", pressure);
 }

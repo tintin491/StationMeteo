@@ -38,6 +38,7 @@ void process_ms(void)
     if(timer) timer--;
 }
 
+
 int main(void)
 {
 //     Initialisation de la couche logicielle HAL
@@ -57,14 +58,12 @@ int main(void)
 //    // Initialisation du capteur d'humidité DHT11
     Humidite_Init();
 
-
     while(1)
     {
         // Lire les données...
         temperature_bmp = Temperature_get();
         pressure_bmp = Pression_get();
-//        humidite_dht = Humidite_get();
-        humidite_dht = 0.0;
+        humidite_dht = Humidite_get();
 
         // Mettre à jour l'affichage (une seule fois pour éviter le scintillement)
         AFFICHEUR_setTemperature(temperature_bmp);
@@ -72,6 +71,5 @@ int main(void)
         AFFICHEUR_setHumidite(humidite_dht);
 
         HAL_Delay(2000);
-
     }
 }

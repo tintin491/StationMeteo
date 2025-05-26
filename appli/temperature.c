@@ -16,48 +16,43 @@
 #include "bmp180/bmp180.h"
 #include "macro_types.h"  // Pour bool_e
 
-// Déclaration des variables globales
+// Dï¿½claration des variables globales
 extern BMP180_t BMP180_Data;
 extern volatile bool_e flag;
 
 /**
- * @brief  Initialisation du capteur de température BMP180
+ * @brief  Initialisation du capteur de tempï¿½rature BMP180
  */
 void Temperature_Init(void) {
-	__HAL_RCC_AFIO_CLK_ENABLE();
-	__HAL_AFIO_REMAP_I2C1_ENABLE();
 
     flag = TRUE;
     BMP180_Init(&BMP180_Data);
 }
 
 /**
- * @brief  Récupère la température depuis le capteur BMP180
- * @return La température en degrés Celsius (°C)
+ * @brief  Rï¿½cupï¿½re la tempï¿½rature depuis le capteur BMP180
+ * @return La tempï¿½rature en degrï¿½s Celsius (ï¿½C)
  */
 float Temperature_get(void) {
-    if (flag) {
-        // Démarrer la mesure de température
-        BMP180_StartTemperature(&BMP180_Data);
+    // DÃ©marrer la mesure de tempÃ©rature
+    BMP180_StartTemperature(&BMP180_Data);
 
-        // Attendre le délai nécessaire (en millisecondes)
-        HAL_Delay(BMP180_Data.Delay);
+    // Attendre le dÃ©lai nÃ©cessaire (en millisecondes)
+    HAL_Delay(BMP180_Data.Delay);
 
-        // Lire la température
-        BMP180_ReadTemperature(&BMP180_Data);
+    // Lire la tempÃ©rature
+    BMP180_ReadTemperature(&BMP180_Data);
 
-        return BMP180_Data.Temperature;
-    }
-    return -999.0f; // Valeur d'erreur distinctive
+    return BMP180_Data.Temperature;
 }
 
 /**
- * @brief  Convertit la température en chaîne formatée
- * @param  temperature La température à convertir (°C)
- * @param  buffer Le buffer où stocker la chaîne
+ * @brief  Convertit la tempï¿½rature en chaï¿½ne formatï¿½e
+ * @param  temperature La tempï¿½rature ï¿½ convertir (ï¿½C)
+ * @param  buffer Le buffer oï¿½ stocker la chaï¿½ne
  */
 void Temperature_to_string(float temperature, char* buffer) {
-    sprintf(buffer, "Temp: %.1f C", temperature);
+    sprintf(buffer, "Temperature: %.1f C", temperature);
 }
 
 
