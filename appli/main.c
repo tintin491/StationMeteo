@@ -19,6 +19,7 @@
 #include "affichage.h"
 #include "humidite.h"
 
+
 volatile uint32_t timer = 0;
 
 // Variable pour la température BMP180
@@ -39,40 +40,38 @@ void process_ms(void)
 
 int main(void)
 {
-    // Initialisation de la couche logicielle HAL
+//     Initialisation de la couche logicielle HAL
     HAL_Init();
 
-	// Initialisation du l'écran
-	AFFICHEUR_init();
+    Systick_add_callback_function(&process_ms);
 
-    // Initialisation du capteur de température BMP180
+//	// Initialisation du l'écran
+	AFFICHEUR_init();
+//
+//    // Initialisation du capteur de température BMP180
     Temperature_Init();
 
-    // Initialisation du capteur de pression BMP180
+////    // Initialisation du capteur de pression BMP180
     Pression_Init();
 
-    // Initialisation du capteur d'humidité DHT11
+//    // Initialisation du capteur d'humidité DHT11
     Humidite_Init();
 
-    // Boucle principale
+
     while(1)
     {
-        // Lire la température du BMP180
+        // Lire les données...
         temperature_bmp = Temperature_get();
-
-        // Lire la pression du BMP180
         pressure_bmp = Pression_get();
+//        humidite_dht = Humidite_get();
+        humidite_dht = 0.0;
 
-        humidite_dht = Humidite_get();
-
-
+        // Mettre à jour l'affichage (une seule fois pour éviter le scintillement)
         AFFICHEUR_setTemperature(temperature_bmp);
         AFFICHEUR_setPression(pressure_bmp);
         AFFICHEUR_setHumidite(humidite_dht);
 
-        Systick_add_callback_function(&process_ms);
+        HAL_Delay(2000);
 
-        // Attendre avant la prochaine mesure
-        HAL_Delay(2000);  // Attendre 2 secondes
     }
 }

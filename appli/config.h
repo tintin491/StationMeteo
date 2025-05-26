@@ -10,8 +10,8 @@
 #include "stm32f1xx_hal.h"
 
 //Choix de la cible utilis�e.
-#define NUCLEO	1
-#define BLUEPILL 0
+#define NUCLEO	0
+#define BLUEPILL 1
 
 #define MY_BLUEPILL_IS_COUNTERFEIT	BLUEPILL
 
@@ -38,8 +38,8 @@
 #endif
 
 //Choisir les broches pour l'UART1, parmi ces deux possibilit�s :
-#define UART1_ON_PB6_PB7
-//#define UART1_ON_PA9_PA10
+//#define UART1_ON_PB6_PB7
+#define UART1_ON_PA9_PA10
 
 //Choisir les broches pour l'UART2, parmi ces deux possibilit�s :
 #define UART2_ON_PA2_PA3
@@ -98,13 +98,13 @@
 
 		#if BLUEPILL					//D�finition des broches CS, WRX et RST pour la BLUEPILL
 			#define ILI9341_CS_PORT       GPIOB
-			#define ILI9341_CS_PIN        GPIO_PIN_11
+			#define ILI9341_CS_PIN        GPIO_PIN_10
 
 			#define ILI9341_WRX_PORT      GPIOB
-			#define ILI9341_WRX_PIN       GPIO_PIN_1
+			#define ILI9341_WRX_PIN       GPIO_PIN_0
 
 			#define ILI9341_RST_PORT      GPIOB
-			#define ILI9341_RST_PIN       GPIO_PIN_10
+			#define ILI9341_RST_PIN       GPIO_PIN_1
 		#endif /* BLUEPILL */
 	#endif
 

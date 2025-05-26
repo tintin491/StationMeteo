@@ -24,6 +24,9 @@ extern volatile bool_e flag;
  * @brief  Initialisation du capteur de température BMP180
  */
 void Temperature_Init(void) {
+	__HAL_RCC_AFIO_CLK_ENABLE();
+	__HAL_AFIO_REMAP_I2C1_ENABLE();
+
     flag = TRUE;
     BMP180_Init(&BMP180_Data);
 }
@@ -34,12 +37,18 @@ void Temperature_Init(void) {
  */
 float Temperature_get(void) {
     if (flag) {
+        // Démarrer la mesure de température
         BMP180_StartTemperature(&BMP180_Data);
-        HAL_Delay(BMP180_Data.Delay/1000 + 1);
+
+        // Attendre le délai nécessaire (en millisecondes)
+        HAL_Delay(BMP180_Data.Delay);
+
+        // Lire la température
         BMP180_ReadTemperature(&BMP180_Data);
+
         return BMP180_Data.Temperature;
     }
-    return 0.0f;
+    return -999.0f; // Valeur d'erreur distinctive
 }
 
 /**

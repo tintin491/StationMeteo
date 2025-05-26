@@ -57,6 +57,8 @@
   "C_Cpp_Runner.useLinkTimeOptimization": false,
   "C_Cpp_Runner.msvcSecureNoWarnings": false,
   "files.associations": {
-    "macro_types.h": "c"
+    "macro_types.h": "c",
+    "stdint.h": "c",
+    "affichage.h": "c"
   }
 }

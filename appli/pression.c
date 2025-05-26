@@ -17,6 +17,8 @@ volatile bool_e flag = FALSE;
  * @note   Cette fonction est déjà appelée dans Temperature_Init()
  */
 void Pression_Init(void) {
+    __HAL_RCC_AFIO_CLK_ENABLE();
+    __HAL_AFIO_REMAP_I2C1_ENABLE();
     // Si le capteur n'est pas déjà initialisé
     if (!flag) {
         flag = TRUE;
